@@ -52,15 +52,20 @@
         android:id="@+id/save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="539dp" />
+        android:layout_marginTop="20dp"
+        android:text="Save"
+        app:layout_constraintEnd_toStartOf="@+id/delete"
+        app:layout_constraintHorizontal_bias="0.269"
+        app:layout_constraintStart_toStartOf="@+id/recipeText"
+        app:layout_constraintTop_toBottomOf="@+id/recipeText" />
 
     <Button
         android:id="@+id/delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="219dp"
-        tools:layout_editor_absoluteY="535dp" />
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="44dp"
+        android:text="Delete"
+        app:layout_constraintEnd_toEndOf="@+id/recipeText"
+        app:layout_constraintTop_toBottomOf="@+id/recipeText" />
 </androidx.constraintlayout.widget.ConstraintLayout>

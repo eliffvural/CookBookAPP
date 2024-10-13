@@ -7,10 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 
 
-
-
-class ListFragment : Fragment() {
-
+class RecipeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,9 +19,8 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list, container, false)
+        return inflater.inflate(R.layout.fragment_recipe, container, false)
     }
-
 
 
 }

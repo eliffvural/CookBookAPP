@@ -39,6 +39,8 @@ class ListFragment : Fragment() {
 
     fun addNew(view: View){
 
+        val action = ListFragmentDirections
+
     }
 
 

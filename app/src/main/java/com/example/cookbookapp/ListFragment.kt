@@ -33,6 +33,12 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.floatingActionButton.setOnClickListener{addNew(it)}
+    }
+
+    fun addNew(view: View){
+
     }
 
 

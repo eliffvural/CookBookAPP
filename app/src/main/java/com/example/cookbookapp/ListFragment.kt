@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import com.example.cookbookapp.databinding.FragmentListBinding
 
 
@@ -39,7 +40,8 @@ class ListFragment : Fragment() {
 
     fun addNew(view: View){
 
-        val action = ListFragmentDirections.actionListFragmentToRecipeFragment(information = "", id=0)
+        val action = ListFragmentDirections.actionListFragmentToRecipeFragment(information = "new", id=0)
+        Navigation.findNavController(view).navigate(action)
 
     }
 

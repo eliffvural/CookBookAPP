@@ -39,7 +39,7 @@ class ListFragment : Fragment() {
 
     fun addNew(view: View){
 
-        val action = ListFragmentDirections
+        val action = ListFragmentDirections.actionListFragmentToRecipeFragment(information = "", id=0)
 
     }
 

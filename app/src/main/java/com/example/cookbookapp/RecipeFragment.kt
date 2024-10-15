@@ -8,7 +8,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.cookbookapp.databinding.FragmentListBinding
@@ -100,6 +103,18 @@ class RecipeFragment : Fragment() {
 
     private fun registerLauncher(){
 
+        permissionLauncher=registerForActivityResult(ActivityResultContracts.RequestPermission()){
+            result->
+            if (result){
+                //izin verildi
+                //galeriye gidebiliriz
+
+            }
+            else{
+                //izin verilmedi
+                Toast.makeText(requireContext(), "İzin verilmedi!")
+            }
+        }
     }
 
     override fun onDestroyView() {

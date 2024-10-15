@@ -42,9 +42,13 @@ class RecipeFragment : Fragment() {
 
             if (information=="new"){
                 //will add new recipe
+                binding.delete.isEnabled= false
+                binding.save.isEnabled=true
             }
             else{
                 //will show added recipe
+                binding.delete.isEnabled= true
+                binding.save.isEnabled=false
             }
 
         }

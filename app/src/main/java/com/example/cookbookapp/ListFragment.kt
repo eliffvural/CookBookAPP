@@ -36,6 +36,8 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.floatingActionButton.setOnClickListener{addNew(it)}
+
+
     }
 
      fun addNew(view: View){

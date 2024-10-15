@@ -34,31 +34,31 @@ class RecipeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.imageView.setOnClickListener{selectImage(it)}
-        binding.save.setOnClickListener { save(it) }
-        binding.delete.setOnClickListener { selectImage(it) }
+        binding.saveButton.setOnClickListener { saveButton(it) }
+        binding.deleteButton.setOnClickListener { deleteButton(it) }
 
         arguments?.let {
             val information= RecipeFragmentArgs.fromBundle(it).information
 
             if (information=="new"){
                 //will add new recipe
-                binding.delete.isEnabled= false
-                binding.save.isEnabled=true
+                binding.deleteButton.isEnabled= false
+                binding.saveButton.isEnabled=true
             }
             else{
                 //will show added recipe
-                binding.delete.isEnabled= true
-                binding.save.isEnabled=false
+                binding.deleteButton.isEnabled= true
+                binding.saveButton.isEnabled=false
             }
 
         }
     }
 
-    fun save(view: View){
+    fun saveButton(view: View){
 
     }
 
-    fun delete(view: View){
+    fun deleteButton(view: View){
 
     }
 

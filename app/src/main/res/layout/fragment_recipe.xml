@@ -4,78 +4,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:onClick="selectImage"
     tools:context=".RecipeFragment">
 
+    <!-- ImageView for Recipe Image -->
 
-    <EditText
-        android:id="@+id/recipeText"
-        android:layout_width="336dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="30dp"
-        android:ems="10"
-        android:hint="Enter recipe: "
-        android:inputType="text"
-        android:rotationX="0"
-        app:layout_constraintEnd_toEndOf="@+id/nameText"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="@+id/nameText"
-        app:layout_constraintTop_toBottomOf="@+id/nameText" />
+    <!-- EditText for Food Name -->
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="184dp"
-        android:layout_height="182dp"
-        android:layout_marginTop="120dp"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_marginTop="20dp"
         android:src="@drawable/selectimage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.063" />
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="121dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="4dp"
+        android:onClick="deleteButton"
+        android:text="Delete"
+        app:layout_constraintEnd_toEndOf="@+id/recipeText"
+        app:layout_constraintTop_toBottomOf="@+id/recipeText" />
+
+    <EditText
+        android:id="@+id/recipeText"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="Enter recipe"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/nameText" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="123dp"
+        android:layout_height="55dp"
+        android:onClick="saveButton"
+        android:text="Save"
+        app:layout_constraintStart_toStartOf="@+id/recipeText"
+        app:layout_constraintTop_toBottomOf="@+id/recipeText" />
 
     <EditText
         android:id="@+id/nameText"
-        android:layout_width="336dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="5dp"
-        android:ems="10"
-        android:hint="Enter food name: "
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="Enter food name"
         android:inputType="text"
-        android:rotationX="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recipeText"
-        tools:ignore="MissingConstraints">
+    <!-- EditText for Recipe Description -->
 
-        <Button
-            android:id="@+id/save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:onClick="save"
-            android:text="Save" />
-
-        <Button
-            android:id="@+id/delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:onClick="delete"
-            android:text="Delete" />
-
-
-    </LinearLayout>
+    <!-- Save and Delete Buttons -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

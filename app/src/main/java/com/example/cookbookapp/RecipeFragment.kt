@@ -112,7 +112,7 @@ class RecipeFragment : Fragment() {
             }
             else{
                 //izin verilmedi
-                Toast.makeText(requireContext(), "İzin verilmedi!")
+                Toast.makeText(requireContext(), "İzin verilmedi!", Toast.LENGTH_LONG).show()
             }
         }
     }

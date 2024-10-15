@@ -1,12 +1,18 @@
 package com.example.cookbookapp
 
+import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.cookbookapp.databinding.FragmentListBinding
 import com.example.cookbookapp.databinding.FragmentRecipeBinding
+import com.google.android.material.snackbar.Snackbar
 
 
 class RecipeFragment : Fragment() {
@@ -15,6 +21,7 @@ class RecipeFragment : Fragment() {
     // This property is only valid between onCreateView and
 // onDestroyView.
     private val binding get() = _binding!!
+    private lateinit var permissionLauncher: ActivityResultLauncher<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +70,28 @@ class RecipeFragment : Fragment() {
     }
 
     fun selectImage(view: View){
+
+        if(ContextCompat.checkSelfPermission(requireContext(),Manifest.permission.READ_EXTERNAL_STORAGE ) != PackageManager.PERMISSION_GRANTED){
+            //izin verilmemis, izin istememiz gerek
+            if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)){
+                //snackbar göstermemiz lazım, kullanicidan neden izin istediğimizi bir kez daha söyleyerek izin almamız lazım
+                 Snackbar.make(view,"Galeriye ulaşıp görsel seçmemiz lazım!", Snackbar.LENGTH_INDEFINITE).setAction(
+                     "İzin Ver",
+                     {
+
+                     //izin isteyeceğiz}
+                     }
+                 ).show()
+                }
+            else{
+                //izin isteyeceğiz.
+            }
+        }
+        else{
+            //izin verilmis, galeriye gidebilirim
+
+
+        }
 
     }
 

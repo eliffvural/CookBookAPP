@@ -1,6 +1,7 @@
 package com.example.cookbookapp
 
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -21,10 +22,12 @@ class RecipeFragment : Fragment() {
     // This property is only valid between onCreateView and
 // onDestroyView.
     private val binding get() = _binding!!
-    private lateinit var permissionLauncher: ActivityResultLauncher<String>
+    private lateinit var permissionLauncher: ActivityResultLauncher<String> //izin istemek için
+    private lateinit var activityResultLauncher: ActivityResultLauncher<Intent> //galeriye girmek için
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        registerLauncher()
 
     }
 
@@ -92,6 +95,10 @@ class RecipeFragment : Fragment() {
 
 
         }
+
+    }
+
+    private fun registerLauncher(){
 
     }
 

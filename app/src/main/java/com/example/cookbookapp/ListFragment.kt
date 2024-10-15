@@ -38,9 +38,9 @@ class ListFragment : Fragment() {
         binding.floatingActionButton.setOnClickListener{addNew(it)}
     }
 
-    fun addNew(view: View){
+     fun addNew(view: View){
 
-        val action = ListFragmentDirections.actionListFragmentToRecipeFragment(information = "new", id=0)
+        val action = ListFragmentDirections.actionListFragmentToRecipeFragment(information ="new", id=0)
         Navigation.findNavController(view).navigate(action)
 
     }

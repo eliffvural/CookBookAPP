@@ -32,8 +32,35 @@ class RecipeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.imageView.setOnClickListener{selectImage(it)}
+        binding.save.setOnClickListener { save(it) }
+        binding.delete.setOnClickListener { selectImage(it) }
+
+        arguments?.let {
+            val information= RecipeFragmentArgs.fromBundle(it).information
+
+            if (information=="new"){
+                //will add new recipe
+            }
+            else{
+                //will show added recipe
+            }
+
+        }
     }
 
+    fun save(view: View){
+
+    }
+
+    fun delete(view: View){
+
+    }
+
+    fun selectImage(view: View){
+
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

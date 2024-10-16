@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.cookbookapp.databinding.FragmentListBinding
@@ -102,6 +103,16 @@ class RecipeFragment : Fragment() {
     }
 
     private fun registerLauncher(){
+
+        activityResultLauncher= registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            result-> if (result.resultCode==AppCompatActivity.RESULT_OK){
+                val intentFromResult= result.data
+            if (intentFromResult != null){
+                //kullanicinin sectigi gorselin nerede kayıtlı oldugunu gosteriyor:
+                intentFromResult.data
+            }
+        }
+        }
 
         permissionLauncher=registerForActivityResult(ActivityResultContracts.RequestPermission()){
             result->

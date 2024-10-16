@@ -2,10 +2,12 @@ package com.example.cookbookapp.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cookbookapp.databinding.FragmentRecipeBinding
 import com.example.cookbookapp.databinding.RecyclerRowBinding
 import com.example.cookbookapp.model.Recipe
+import com.example.cookbookapp.view.ListFragmentDirections
 
 class RecipeAdapter(val recipeList: List<Recipe>) : RecyclerView.Adapter<RecipeAdapter.RecipeHolder>(){
     class RecipeHolder(val binding: RecyclerRowBinding) : RecyclerView.ViewHolder(binding.root){
@@ -18,10 +20,14 @@ class RecipeAdapter(val recipeList: List<Recipe>) : RecyclerView.Adapter<RecipeA
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return recipeList.size
     }
 
     override fun onBindViewHolder(holder: RecipeHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.binding.recyclerViewTextView.text= recipeList[position].name
+        holder.itemView.setOnClickListener{
+            val action = ListFragmentDirections.actionListFragmentToRecipeFragment(information = "old", id = recipeList[position].id)
+            Navigation.findNavController(it). navigate(action)
+        }
     }
 }

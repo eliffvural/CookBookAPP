@@ -101,6 +101,8 @@ class RecipeFragment : Fragment() {
             val byteArray= outputStream.toByteArray()
 
             val recipe= Recipe(name,ingredient,byteArray)
+
+            recipeDAO.insert(recipe)
         }
 
 

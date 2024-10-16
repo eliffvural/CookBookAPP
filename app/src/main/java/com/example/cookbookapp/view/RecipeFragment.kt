@@ -47,6 +47,7 @@ class RecipeFragment : Fragment() {
 
     private var chosedImage: Uri? =null
     private var chosedBitmap: Bitmap? =null
+    private var chosedRecipe: Recipe? =null
 
     private val mDisposable = CompositeDisposable() //çok fazla istek gonderdigimizde karsilasiriz.
 
@@ -86,6 +87,7 @@ class RecipeFragment : Fragment() {
 
             if (information=="new"){
                 //will add new recipe
+                chosedRecipe=null
                 binding.deleteButton.isEnabled= false
                 binding.saveButton.isEnabled=true
             }
@@ -134,6 +136,8 @@ class RecipeFragment : Fragment() {
     }
 
     fun deleteButton(view: View){
+
+        if(se)
 
     }
 

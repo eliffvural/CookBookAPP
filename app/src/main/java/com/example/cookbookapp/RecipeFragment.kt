@@ -3,6 +3,8 @@ package com.example.cookbookapp
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -28,6 +30,9 @@ class RecipeFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var permissionLauncher: ActivityResultLauncher<String> //izin istemek için
     private lateinit var activityResultLauncher: ActivityResultLauncher<Intent> //galeriye girmek için
+
+    private var chosedImage: Uri? =null
+    private var chosedBitmap: Bitmap? =null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

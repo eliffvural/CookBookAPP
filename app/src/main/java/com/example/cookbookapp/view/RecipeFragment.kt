@@ -20,7 +20,9 @@ import android.Manifest
 import android.graphics.ImageDecoder
 import android.os.Build
 import com.example.cookbookapp.databinding.FragmentRecipeBinding
+import com.example.cookbookapp.model.Recipe
 import com.google.android.material.snackbar.Snackbar
+import java.io.ByteArrayOutputStream
 import kotlin.math.max
 
 
@@ -81,6 +83,15 @@ class RecipeFragment : Fragment() {
         val ingredient=binding.recipeText.text.toString()
 
         //val smallBitmap = smallBitmapCreate(chosedBitmap, 300)
+
+        if(chosedBitmap != null){
+            val smallBitmap = smallBitmapCreate(chosedBitmap!!, 300)
+            val outputStream = ByteArrayOutputStream()
+            smallBitmap.compress(Bitmap.CompressFormat.PNG,50, outputStream)
+            val byteArray= outputStream.toByteArray()
+
+            val recipe= Recipe(name,ingredient,byteArray)
+        }
 
 
     }
@@ -228,7 +239,7 @@ class RecipeFragment : Fragment() {
             width=kisaltilmisGenislik.toInt()
         }
 
-        return Bitmap.createScaledBitmap(bitmapUserChosed, 100,100, true)
+        return Bitmap.createScaledBitmap(bitmapUserChosed, width,height, true)
     }
 
     override fun onDestroyView() {

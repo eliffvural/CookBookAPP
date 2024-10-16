@@ -1,6 +1,5 @@
-package com.example.cookbookapp
+package com.example.cookbookapp.view
 
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -12,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -20,11 +18,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import android.Manifest
 import android.graphics.ImageDecoder
-import android.media.Image
 import android.os.Build
-import android.os.Build.VERSION
-import androidx.annotation.RequiresApi
-import com.example.cookbookapp.databinding.FragmentListBinding
 import com.example.cookbookapp.databinding.FragmentRecipeBinding
 import com.google.android.material.snackbar.Snackbar
 

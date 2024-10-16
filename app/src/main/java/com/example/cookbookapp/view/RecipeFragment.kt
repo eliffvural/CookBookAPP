@@ -19,13 +19,19 @@ import androidx.core.content.ContextCompat
 import android.Manifest
 import android.graphics.ImageDecoder
 import android.os.Build
+import androidx.navigation.Navigation
 import androidx.room.Room
+import com.example.cookbookapp.roomdb.RecipeDatabase  // Örnek import satırı
+
 import androidx.room.Room.databaseBuilder
 import androidx.room.RoomDatabase
 import com.example.cookbookapp.databinding.FragmentRecipeBinding
 import com.example.cookbookapp.model.Recipe
 import com.example.cookbookapp.roomdb.RecipeDAO
 import com.google.android.material.snackbar.Snackbar
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import java.io.ByteArrayOutputStream
 import kotlin.math.max
 
@@ -42,8 +48,13 @@ class RecipeFragment : Fragment() {
     private var chosedImage: Uri? =null
     private var chosedBitmap: Bitmap? =null
 
+    private val mDisposable = CompositeDisposable() //çok fazla istek gonderdigimizde karsilasiriz.
+
+
    private lateinit var db: RecipeDatabase
    private lateinit var recipeDAO: RecipeDAO
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,10 +113,24 @@ class RecipeFragment : Fragment() {
 
             val recipe= Recipe(name,ingredient,byteArray)
 
-            recipeDAO.insert(recipe)
+            //rx java
+
+            mDisposable.add(recipeDAO
+                .insert(recipe)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::handleResponseForInsert))
+
         }
 
 
+
+    }
+
+    private fun handleResponseForInsert(){
+        //bir önceki fragmenta dön
+        val action= RecipeFragmentDirections.actionRecipeFragmentTolistFragment()
+        Navigation.findNavController(requireView()).navigate(action)
     }
 
     fun deleteButton(view: View){

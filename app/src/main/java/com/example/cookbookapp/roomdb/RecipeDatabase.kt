@@ -5,6 +5,8 @@ import androidx.room.RoomDatabase
 import com.example.cookbookapp.model.Recipe
 
 @Database(entities = [Recipe::class], version = 1)
-abstract class AppDatabase : RoomDatabase() {
-    abstract fun userDao(): RecipeDAO
+abstract class RecipeDatabase : RoomDatabase() {
+    abstract fun recipeDAO(): RecipeDAO
 }
+
+

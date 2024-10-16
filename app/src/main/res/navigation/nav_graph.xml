@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -14,6 +13,7 @@
             android:id="@+id/action_listFragment_to_recipeFragment"
             app:destination="@id/recipeFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/recipeFragment"
         android:name="com.example.cookbookapp.view.RecipeFragment"
@@ -25,5 +25,10 @@
         <argument
             android:name="id"
             app:argType="integer" />
+
+        <!-- Buraya action ekleyerek RecipeFragment'tan ListFragment'a geçişi tanımla -->
+        <action
+            android:id="@+id/action_recipeFragmentTolistFragment"
+            app:destination="@id/listFragment" />
     </fragment>
 </navigation>

@@ -15,7 +15,7 @@ interface RecipeDAO {
     @Query("SELECT*FROM Recipe")
     fun getAll(): Flowable<List<Recipe>>
 
-    @Query("SELECT*FROM Recipe WHERE id=id")
+    @Query("SELECT*FROM Recipe WHERE id= :id")
     fun findById(id: Int): Flowable<Recipe>
 
     @Insert

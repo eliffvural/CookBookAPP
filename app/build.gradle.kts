@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id ("androidx.navigation.safeargs.kotlin")
     id ("com.google.devtools.ksp")
+
 }
 
 android {

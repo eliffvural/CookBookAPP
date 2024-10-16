@@ -9,6 +9,8 @@ import androidx.navigation.Navigation
 import androidx.room.Room
 import com.example.cookbookapp.databinding.FragmentListBinding
 import com.example.cookbookapp.roomdb.RecipeDAO
+import com.example.cookbookapp.roomdb.RecipeDatabase
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 
 
 class ListFragment : Fragment() {
@@ -17,17 +19,18 @@ class ListFragment : Fragment() {
     // This property is only valid between onCreateView and
 // onDestroyView.
     private val binding get() = _binding!!
-
-    private lateinit var db: RecipeDatabase
+    private lateinit var db:  RecipeDatabase
     private lateinit var recipeDAO: RecipeDAO
+    private val mDisposable= CompositeDisposable()
+
+
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        db = Room.databaseBuilder(requireContext(), RecipeDatabase::class.java, name = "Recipes").build()
-        recipeDAO=db.recipeDAO()
+
 
     }
 

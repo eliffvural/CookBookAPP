@@ -79,7 +79,7 @@ class RecipeFragment : Fragment() {
         val name= binding.nameText.text.toString()
         val ingredient=binding.recipeText.text.toString()
 
-        val smallBitmap = smallBitmapCreate(chosedBitmap, 300)
+        //val smallBitmap = smallBitmapCreate(chosedBitmap, 300)
 
 
     }
@@ -208,7 +208,20 @@ class RecipeFragment : Fragment() {
     }
 
     private fun smallBitmapCreate(bitmapUserChosed: Bitmap, maxBoyut: Int) : Bitmap{
+        var width= bitmapUserChosed.width
+        var height= bitmapUserChosed.height
 
+        val bitmapOrani: Double = width.toDouble()/ height.toDouble()
+
+        if(bitmapOrani>1){
+
+            //görsel yatay
+            width = maxBoyut
+            val kisaltilmisYukseklik = width/bitmapOrani
+            height = kisaltilmisYukseklik.toInt()
+        }
+
+        return Bitmap.createScaledBitmap(bitmapUserChosed, 100,100, true)
     }
 
     override fun onDestroyView() {

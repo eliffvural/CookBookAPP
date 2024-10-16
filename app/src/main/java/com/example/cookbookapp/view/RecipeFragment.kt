@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import android.Manifest
+import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
 import android.os.Build
 import androidx.navigation.Navigation
@@ -100,6 +101,14 @@ class RecipeFragment : Fragment() {
         }
     }
 
+    private fun handleResponse(recipe: Recipe){
+        binding.nameText.setText(recipe.name)
+        binding.recipeText.setText(recipe.ingredient)
+        val bitmap=BitmapFactory.decodeByteArray(recipe.image,0,recipe.image.size)
+        binding.imageView.setImageBitmap(bitmap)
+        chosedRecipe=recipe
+    }
+
     fun saveButton(view: View){
 
         val name= binding.nameText.text.toString()
@@ -137,7 +146,14 @@ class RecipeFragment : Fragment() {
 
     fun deleteButton(view: View){
 
-        if(se)
+        if(chosedRecipe!=null){
+            mDisposable.add(
+            recipeDAO.delete(recipe = chosedRecipe!!)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::handleResponseForInsert)
+            )
+        }
 
     }
 

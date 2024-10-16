@@ -6,11 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.cookbookapp.databinding.FragmentListBinding
+import com.example.cookbookapp.model.Recipe
 import com.example.cookbookapp.roomdb.RecipeDAO
 import com.example.cookbookapp.roomdb.RecipeDatabase
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 
 class ListFragment : Fragment() {
@@ -48,7 +52,23 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.floatingActionButton.setOnClickListener{addNew(it)}
+        binding.recipeRecyclerView.layoutManager= LinearLayoutManager(requireContext())
 
+
+
+    }
+
+    private fun getDatas(){
+        mDisposable.add(
+            recipeDAO.getAll()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::handleResponse)
+        )
+
+    }
+
+    private fun handleResponse(recipes: List<Recipe>){
 
     }
 

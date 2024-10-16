@@ -53,6 +53,7 @@ class ListFragment : Fragment() {
 
         binding.floatingActionButton.setOnClickListener{addNew(it)}
         binding.recipeRecyclerView.layoutManager= LinearLayoutManager(requireContext())
+        getDatas()
 
 
 
@@ -69,6 +70,11 @@ class ListFragment : Fragment() {
     }
 
     private fun handleResponse(recipes: List<Recipe>){
+
+        recipes.forEach{
+            println(it.name)
+            println(it.ingredient)
+        }
 
     }
 

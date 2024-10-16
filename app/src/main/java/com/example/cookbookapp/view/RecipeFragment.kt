@@ -50,6 +50,7 @@ class RecipeFragment : Fragment() {
         registerLauncher()
 
         db = Room.databaseBuilder(requireContext(), RecipeDatabase::class.java, name = "Recipes").build()
+        recipeDAO=db.recipeDAO()
 
     }
 

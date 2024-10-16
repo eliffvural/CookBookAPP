@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import androidx.room.Room
 import com.example.cookbookapp.databinding.FragmentListBinding
 import com.example.cookbookapp.roomdb.RecipeDAO
 
@@ -24,6 +25,9 @@ class ListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        db = Room.databaseBuilder(requireContext(), RecipeDatabase::class.java, name = "Recipes").build()
+        recipeDAO=db.recipeDAO()
 
     }
 

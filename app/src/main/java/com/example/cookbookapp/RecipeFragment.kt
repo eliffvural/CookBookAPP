@@ -114,7 +114,6 @@ class RecipeFragment : Fragment() {
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.P)
     private fun registerLauncher(){
 
         activityResultLauncher= registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
@@ -124,16 +123,22 @@ class RecipeFragment : Fragment() {
                 //kullanicinin sectigi gorselin nerede kayıtlı oldugunu gosteriyor:
                 chosedImage=intentFromResult.data
 
-                if(Build.VERSION.SDK_INT>=28){
-                    val source= ImageDecoder.createSource(requireActivity().contentResolver, chosedImage !!)
-                    chosedBitmap=ImageDecoder.decodeBitmap(source)
-                    binding.imageView.setImageBitmap(chosedBitmap)
 
+                try{
+                    if(Build.VERSION.SDK_INT>=28){
+                        val source= ImageDecoder.createSource(requireActivity().contentResolver, chosedImage !!)
+                        chosedBitmap=ImageDecoder.decodeBitmap(source)
+                        binding.imageView.setImageBitmap(chosedBitmap)
+
+                    }
+                    else{
+                        chosedBitmap=MediaStore.Images.Media.getBitmap(requireActivity().contentResolver,chosedImage)
+                        binding.imageView.setImageBitmap(chosedBitmap)
+                    }
+                } catch (e: Exception){
+                    println(e.localizedMessage)
                 }
-                else{
-                    chosedBitmap=MediaStore.Images.Media.getBitmap(requireActivity().contentResolver,chosedImage)
-                    binding.imageView.setImageBitmap(chosedBitmap)
-                }
+
 
 
                 //secilen gorseli bitmap e ceviric

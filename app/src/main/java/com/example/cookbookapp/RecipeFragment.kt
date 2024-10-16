@@ -99,15 +99,22 @@ class RecipeFragment : Fragment() {
                      {
 
                      //izin isteyeceğiz}
+                         permissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
                      }
                  ).show()
                 }
             else{
                 //izin isteyeceğiz.
+
+                permissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+
             }
         }
         else{
             //izin verilmis, galeriye gidebilirim
+
+            val intentToGallery= Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            activityResultLauncher.launch(intentToGallery)
 
 
         }
@@ -151,6 +158,8 @@ class RecipeFragment : Fragment() {
             if (result){
                 //izin verildi
                 //galeriye gidebiliriz
+                val intentToGallery= Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                activityResultLauncher.launch(intentToGallery)
 
             }
             else{

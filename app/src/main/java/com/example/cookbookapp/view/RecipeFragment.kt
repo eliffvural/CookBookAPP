@@ -76,6 +76,12 @@ class RecipeFragment : Fragment() {
 
     fun saveButton(view: View){
 
+        val name= binding.nameText.text.toString()
+        val ingredient=binding.recipeText.text.toString()
+
+        val smallBitmap = smallBitmapCreate(chosedBitmap, 300)
+
+
     }
 
     fun deleteButton(view: View){
@@ -199,6 +205,10 @@ class RecipeFragment : Fragment() {
                 Toast.makeText(requireContext(), "İzin verilmedi!", Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    private fun smallBitmapCreate(bitmapUserChosed: Bitmap, maxBoyut: Int) : Bitmap{
+
     }
 
     override fun onDestroyView() {

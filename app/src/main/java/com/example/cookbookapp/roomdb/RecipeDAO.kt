@@ -1,10 +1,13 @@
 package com.example.cookbookapp.roomdb
 
+import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.cookbookapp.model.Recipe
 
+
+@Dao
 interface RecipeDAO {
 
     @Query("SELECT*FROM Recipe")

@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -114,7 +115,12 @@ class RecipeFragment : Fragment() {
                 val intentFromResult= result.data
             if (intentFromResult != null){
                 //kullanicinin sectigi gorselin nerede kayıtlı oldugunu gosteriyor:
-                intentFromResult.data
+                chosedImage=intentFromResult.data
+
+                chosedBitmap=MediaStore.Images.Media.getBitmap(requireActivity().contentResolver,chosedImage)
+                binding.imageView.setImageBitmap(chosedBitmap)
+
+                //secilen gorseli bitmap e ceviric
             }
         }
         }

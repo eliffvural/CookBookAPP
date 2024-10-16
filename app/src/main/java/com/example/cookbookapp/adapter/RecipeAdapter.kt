@@ -1,5 +1,6 @@
 package com.example.cookbookapp.adapter
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cookbookapp.databinding.FragmentRecipeBinding
@@ -12,7 +13,8 @@ class RecipeAdapter(val recipeList: List<Recipe>) : RecyclerView.Adapter<RecipeA
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeHolder {
-        TODO("Not yet implemented")
+        val recyclerRowBinding = RecyclerRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return RecipeHolder(recyclerRowBinding)
     }
 
     override fun getItemCount(): Int {

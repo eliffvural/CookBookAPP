@@ -21,6 +21,7 @@ import android.graphics.ImageDecoder
 import android.os.Build
 import com.example.cookbookapp.databinding.FragmentRecipeBinding
 import com.google.android.material.snackbar.Snackbar
+import kotlin.math.max
 
 
 class RecipeFragment : Fragment() {
@@ -219,6 +220,12 @@ class RecipeFragment : Fragment() {
             width = maxBoyut
             val kisaltilmisYukseklik = width/bitmapOrani
             height = kisaltilmisYukseklik.toInt()
+        } else{
+
+            //görsel dikey
+            height= maxBoyut
+            val kisaltilmisGenislik = height*bitmapOrani
+            width=kisaltilmisGenislik.toInt()
         }
 
         return Bitmap.createScaledBitmap(bitmapUserChosed, 100,100, true)

@@ -20,22 +20,18 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 class ListFragment : Fragment() {
 
     private var _binding: FragmentListBinding? = null
-    // This property is only valid between onCreateView and
-// onDestroyView.
     private val binding get() = _binding!!
-    private lateinit var db:  RecipeDatabase
+    private lateinit var db: RecipeDatabase
     private lateinit var recipeDAO: RecipeDAO
-    private val mDisposable= CompositeDisposable()
-
-
-
-
+    private val mDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
-
+        // Database ve DAO'yu burada başlatıyoruz
+        db = Room.databaseBuilder(requireContext(), RecipeDatabase::class.java, "Recipes")
+            .build()
+        recipeDAO = db.recipeDAO()
     }
 
     override fun onCreateView(
@@ -44,54 +40,41 @@ class ListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentListBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.floatingActionButton.setOnClickListener{addNew(it)}
-        binding.recipeRecyclerView.layoutManager= LinearLayoutManager(requireContext())
+        binding.floatingActionButton.setOnClickListener { addNew(it) }
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         getDatas()
-
-
-
     }
 
-    private fun getDatas(){
+    private fun getDatas() {
         mDisposable.add(
             recipeDAO.getAll()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::handleResponse)
         )
-
     }
 
-    private fun handleResponse(recipes: List<Recipe>){
-
-        recipes.forEach{
+    private fun handleResponse(recipes: List<Recipe>) {
+        recipes.forEach {
             println(it.name)
             println(it.ingredient)
         }
-
     }
 
-     fun addNew(view: View){
-
-        val action = ListFragmentDirections.actionListFragmentToRecipeFragment(information ="new", id=0)
+    fun addNew(view: View) {
+        val action = ListFragmentDirections.actionListFragmentToRecipeFragment(information = "new", id = 0)
         Navigation.findNavController(view).navigate(action)
-
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
         mDisposable.clear()
     }
-
-
-
 }

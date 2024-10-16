@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
+import com.example.cookbookapp.adapter.RecipeAdapter
 import com.example.cookbookapp.databinding.FragmentListBinding
 import com.example.cookbookapp.model.Recipe
 import com.example.cookbookapp.roomdb.RecipeDAO
@@ -27,7 +28,6 @@ class ListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         // Database ve DAO'yu burada başlatıyoruz
         db = Room.databaseBuilder(requireContext(), RecipeDatabase::class.java, "Recipes")
             .build()
@@ -45,7 +45,6 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.floatingActionButton.setOnClickListener { addNew(it) }
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         getDatas()
@@ -61,13 +60,11 @@ class ListFragment : Fragment() {
     }
 
     private fun handleResponse(recipes: List<Recipe>) {
-        recipes.forEach {
-            println(it.name)
-            println(it.ingredient)
-        }
+        val adapter = RecipeAdapter(recipes)
+        binding.recyclerView.adapter = adapter // recyclerView ID'sini kullandık
     }
 
-    fun addNew(view: View) {
+    fun addNew (view: View) {
         val action = ListFragmentDirections.actionListFragmentToRecipeFragment(information = "new", id = 0)
         Navigation.findNavController(view).navigate(action)
     }
@@ -78,3 +75,4 @@ class ListFragment : Fragment() {
         mDisposable.clear()
     }
 }
+

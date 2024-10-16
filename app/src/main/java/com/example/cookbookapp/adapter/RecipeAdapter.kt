@@ -4,8 +4,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cookbookapp.databinding.FragmentRecipeBinding
 import com.example.cookbookapp.databinding.RecyclerRowBinding
+import com.example.cookbookapp.model.Recipe
 
-class RecipeAdapter : RecyclerView.Adapter<RecipeAdapter.RecipeHolder>(){
+class RecipeAdapter(val recipeList: List<Recipe>) : RecyclerView.Adapter<RecipeAdapter.RecipeHolder>(){
     class RecipeHolder(val binding: RecyclerRowBinding) : RecyclerView.ViewHolder(binding.root){
 
     }

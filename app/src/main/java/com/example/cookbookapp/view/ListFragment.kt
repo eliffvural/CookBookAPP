@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.example.cookbookapp.databinding.FragmentListBinding
+import com.example.cookbookapp.roomdb.RecipeDAO
 
 
 class ListFragment : Fragment() {
@@ -15,6 +16,10 @@ class ListFragment : Fragment() {
     // This property is only valid between onCreateView and
 // onDestroyView.
     private val binding get() = _binding!!
+
+    private lateinit var db: RecipeDatabase
+    private lateinit var recipeDAO: RecipeDAO
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -19,8 +19,12 @@ import androidx.core.content.ContextCompat
 import android.Manifest
 import android.graphics.ImageDecoder
 import android.os.Build
+import androidx.room.Room
+import androidx.room.Room.databaseBuilder
+import androidx.room.RoomDatabase
 import com.example.cookbookapp.databinding.FragmentRecipeBinding
 import com.example.cookbookapp.model.Recipe
+import com.example.cookbookapp.roomdb.RecipeDAO
 import com.google.android.material.snackbar.Snackbar
 import java.io.ByteArrayOutputStream
 import kotlin.math.max
@@ -38,9 +42,14 @@ class RecipeFragment : Fragment() {
     private var chosedImage: Uri? =null
     private var chosedBitmap: Bitmap? =null
 
+   private lateinit var db: RecipeDatabase
+   private lateinit var recipeDAO: RecipeDAO
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         registerLauncher()
+
+        db = Room.databaseBuilder(requireContext(), RecipeDatabase::class.java, name = "Recipes").build()
 
     }
 

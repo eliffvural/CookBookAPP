@@ -18,6 +18,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import android.Manifest
+import android.graphics.ImageDecoder
+import android.media.Image
+import android.os.Build
+import android.os.Build.VERSION
+import androidx.annotation.RequiresApi
 import com.example.cookbookapp.databinding.FragmentListBinding
 import com.example.cookbookapp.databinding.FragmentRecipeBinding
 import com.google.android.material.snackbar.Snackbar
@@ -84,7 +90,7 @@ class RecipeFragment : Fragment() {
 
     fun selectImage(view: View){
 
-        if(ContextCompat.checkSelfPermission(requireContext(),Manifest.permission.READ_EXTERNAL_STORAGE ) != PackageManager.PERMISSION_GRANTED){
+        if(ContextCompat.checkSelfPermission(requireContext(),Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
             //izin verilmemis, izin istememiz gerek
             if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)){
                 //snackbar göstermemiz lazım, kullanicidan neden izin istediğimizi bir kez daha söyleyerek izin almamız lazım
@@ -108,6 +114,7 @@ class RecipeFragment : Fragment() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.P)
     private fun registerLauncher(){
 
         activityResultLauncher= registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
@@ -117,8 +124,17 @@ class RecipeFragment : Fragment() {
                 //kullanicinin sectigi gorselin nerede kayıtlı oldugunu gosteriyor:
                 chosedImage=intentFromResult.data
 
-                chosedBitmap=MediaStore.Images.Media.getBitmap(requireActivity().contentResolver,chosedImage)
-                binding.imageView.setImageBitmap(chosedBitmap)
+                if(Build.VERSION.SDK_INT>=28){
+                    val source= ImageDecoder.createSource(requireActivity().contentResolver, chosedImage !!)
+                    chosedBitmap=ImageDecoder.decodeBitmap(source)
+                    binding.imageView.setImageBitmap(chosedBitmap)
+
+                }
+                else{
+                    chosedBitmap=MediaStore.Images.Media.getBitmap(requireActivity().contentResolver,chosedImage)
+                    binding.imageView.setImageBitmap(chosedBitmap)
+                }
+
 
                 //secilen gorseli bitmap e ceviric
             }

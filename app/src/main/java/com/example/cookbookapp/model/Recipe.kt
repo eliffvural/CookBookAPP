@@ -2,6 +2,7 @@ package com.example.cookbookapp.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 
 @Entity
@@ -15,4 +16,7 @@ data class Recipe(
 
     @ColumnInfo(name="image")
     var image: ByteArray
-)
+){
+    @PrimaryKey(autoGenerate = true)
+    var id=0
+}

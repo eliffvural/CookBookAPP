@@ -37,24 +37,27 @@ import java.io.ByteArrayOutputStream
 import kotlin.math.max
 
 
+private lateinit var permissionLauncher: ActivityResultLauncher<String> //izin istemek için
+private lateinit var activityResultLauncher: ActivityResultLauncher<Intent> //galeriye girmek için
+private var chosedImage: Uri? =null
+private var chosedBitmap: Bitmap? =null
+private var chosedRecipe: Recipe? =null
+
+private val mDisposable = CompositeDisposable() //çok fazla istek gonderdigimizde karsilasiriz.
+
+
+private lateinit var db: RecipeDatabase
+private lateinit var recipeDAO: RecipeDAO
+
 class RecipeFragment : Fragment() {
 
     private var _binding: FragmentRecipeBinding? = null
     // This property is only valid between onCreateView and
 // onDestroyView.
     private val binding get() = _binding!!
-    private lateinit var permissionLauncher: ActivityResultLauncher<String> //izin istemek için
-    private lateinit var activityResultLauncher: ActivityResultLauncher<Intent> //galeriye girmek için
-
-    private var chosedImage: Uri? =null
-    private var chosedBitmap: Bitmap? =null
-    private var chosedRecipe: Recipe? =null
-
-    private val mDisposable = CompositeDisposable() //çok fazla istek gonderdigimizde karsilasiriz.
 
 
-   private lateinit var db: RecipeDatabase
-   private lateinit var recipeDAO: RecipeDAO
+
 
 
 
@@ -88,14 +91,21 @@ class RecipeFragment : Fragment() {
 
             if (information=="new"){
                 //will add new recipe
-                chosedRecipe=null
                 binding.deleteButton.isEnabled= false
                 binding.saveButton.isEnabled=true
+                binding.nameText.setText("")
+                binding.recipeText.setText("")
             }
             else{
                 //will show added recipe
                 binding.deleteButton.isEnabled= true
                 binding.saveButton.isEnabled=false
+                val id = RecipeFragmentArgs.fromBundle(it).id
+                mDisposable.add(
+                    recipeDAO.findById(id)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(this::handleResponse))
             }
 
         }

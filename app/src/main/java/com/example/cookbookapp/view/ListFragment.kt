@@ -34,6 +34,11 @@ class ListFragment : Fragment() {
         recipeDAO = db.recipeDAO()
     }
 
+    private fun handleResponse(recipes: List<Recipe>) {
+        val adapter = RecipeAdapter(recipes)
+        binding.recyclerView.adapter = adapter // recyclerView ID'sini kullandık
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -59,10 +64,7 @@ class ListFragment : Fragment() {
         )
     }
 
-    private fun handleResponse(recipes: List<Recipe>) {
-        val adapter = RecipeAdapter(recipes)
-        binding.recyclerView.adapter = adapter // recyclerView ID'sini kullandık
-    }
+
 
     fun addNew (view: View) {
         val action = ListFragmentDirections.actionListFragmentToRecipeFragment(information = "new", id = 0)
